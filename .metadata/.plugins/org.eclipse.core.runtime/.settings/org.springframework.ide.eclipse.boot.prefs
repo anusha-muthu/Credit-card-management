@@ -1,9 +1,9 @@
 eclipse.preferences.version=1
-org.springframework.ide.eclipse.boot.wizard.PopularityTracker.data-jpa=1
-org.springframework.ide.eclipse.boot.wizard.PopularityTracker.devtools=1
-org.springframework.ide.eclipse.boot.wizard.PopularityTracker.security=1
-org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web=1
-org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web-services=1
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.data-jpa=2
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.devtools=2
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.security=2
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web=2
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.web-services=2
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.artifactId=Merchant
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.bootVersion=4.1.1
 org.springframework.ide.eclipse.boot.wizard.PreferredSelections.groupId=com.ofss
