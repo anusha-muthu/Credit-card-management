@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Merchant Home</title>
+</head>
+
+<body>
+
+<h1>Hello Merchant</h1>
+
+<h2>Select a Service</h2>
+s
+        <a href="/merchant_details.html">
+            Manage Merchant Details
+        </a>
+   
+        <a href="#">
+            View Transactions
+        </a>
+   
+
+<form action="/logout" method="post">
+
+    <button type="submit">
+        Logout
+    </button>
+
+</form>
+
+</body>
+</html>
