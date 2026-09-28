@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.ofss.entity.Transactions.java&apos; to &apos;TransactionsTable.java&apos;&#x0D;&#x0A;- Original project: &apos;Transactions&apos;&#x0D;&#x0A;- Original element: &apos;com.ofss.entity.Transactions.java&apos;&#x0D;&#x0A;- Renamed element: &apos;com.ofss.entity.TransactionsTable.java&apos;" description="Rename compilation unit &apos;Transactions.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.ofss.entity{Transactions.java" name="TransactionsTable.java" references="false" stamp="1790516440040" version="1.0"/>
+</session>

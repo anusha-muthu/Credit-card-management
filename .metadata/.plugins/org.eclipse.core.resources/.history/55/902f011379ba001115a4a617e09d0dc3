@@ -1,0 +1,5 @@
+package com.ofss.repository;
+
+public class TransactionsRepository extends JpaRepository <Transactions, Long>{
+	
+}
