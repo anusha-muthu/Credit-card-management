@@ -1,5 +1,0 @@
-package com.ofss.repository;
-
-public class TransactionsRepository {
-
-}
