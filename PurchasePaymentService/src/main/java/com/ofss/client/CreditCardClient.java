@@ -19,7 +19,7 @@ public class CreditCardClient {
                 .build();
     }
 
-    public CardResponse getCard(Long cardNumber) {
+    public CardResponse getCard(String cardNumber) {
 
         ResponseEntity<CardResponse> response = restClient.get()
                 .uri("/api/cards/{cardNumber}", cardNumber)
@@ -29,7 +29,7 @@ public class CreditCardClient {
         return response.getBody();
     }
 
-    public void updateAvailableCredit(Long cardNumber,
+    public void updateAvailableCredit(String cardNumber,
                                       BigDecimal availableCredit) {
 
         restClient.put()
@@ -39,7 +39,7 @@ public class CreditCardClient {
                 .toBodilessEntity();
     }
 
-    public void updateOutstanding(Long cardNumber,
+    public void updateOutstanding(String cardNumber,
                                   BigDecimal outstandingAmount) {
 
         restClient.put()

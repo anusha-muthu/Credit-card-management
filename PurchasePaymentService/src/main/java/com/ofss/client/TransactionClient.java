@@ -18,7 +18,7 @@ public class TransactionClient {
                 .build();
     }
 
-    public void createTransaction(Long cardNumber,
+    public void createTransaction(String cardNumber,
                                   Long merchantId,
                                   BigDecimal amount,
                                   String transactionType,

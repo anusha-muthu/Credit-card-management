@@ -17,7 +17,7 @@ public class MerchantClient {
                 .build();
     }
 
-    public MerchantResponse getMerchant(Long merchantId) {
+    public MerchantResponse getMerchant(String merchantId) {
 
         ResponseEntity<MerchantResponse> response = restClient.get()
                 .uri("/api/merchants/{merchantId}", merchantId)
