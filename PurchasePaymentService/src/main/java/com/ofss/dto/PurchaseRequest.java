@@ -6,23 +6,23 @@ import java.math.BigDecimal;
 public class PurchaseRequest {
 	
 
-	private Long cardNumber;
+	private String cardNumber;
 	private Long merchantId;
 	private BigDecimal amount;
 	public PurchaseRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PurchaseRequest(Long cardNumber, Long merchantId, BigDecimal amount) {
+	public PurchaseRequest(String cardNumber, Long merchantId, BigDecimal amount) {
 		super();
 		this.cardNumber = cardNumber;
 		this.merchantId = merchantId;
 		this.amount = amount;
 	}
-	public Long getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setCardNumber(Long cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	public Long getMerchantId() {
