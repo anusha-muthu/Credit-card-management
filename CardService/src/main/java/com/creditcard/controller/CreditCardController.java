@@ -79,4 +79,19 @@ public class CreditCardController {
     public ResponseEntity<BigDecimal> getOutstandingAmount(@PathVariable String cardNumber) {
         return ResponseEntity.ok(creditCardService.getOutstandingAmount(cardNumber));
     }
+    @PutMapping("/{cardNumber}/purchase/{amount}")
+    public ResponseEntity<CreditCard> applyPurchase(
+            @PathVariable String cardNumber,
+            @PathVariable BigDecimal amount) {
+
+        return ResponseEntity.ok(creditCardService.applyPurchase(cardNumber, amount));
+    }
+
+    @PutMapping("/{cardNumber}/payment/{amount}")
+    public ResponseEntity<CreditCard> applyPayment(
+            @PathVariable String cardNumber,
+            @PathVariable BigDecimal amount) {
+
+        return ResponseEntity.ok(creditCardService.applyPayment(cardNumber, amount));
+    }
 }

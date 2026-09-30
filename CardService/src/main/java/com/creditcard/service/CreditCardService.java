@@ -99,4 +99,41 @@ public class CreditCardService {
             throw new RuntimeException("Customer does not exist with id: " + customerId);
         }
     }
+    public CreditCard applyPurchase(String cardNumber, BigDecimal amount) {
+        CreditCard card = getCardByNumber(cardNumber);
+
+        if (!"ACTIVE".equalsIgnoreCase(card.getCardStatus())) {
+            throw new RuntimeException("Card is not active");
+        }
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("Purchase amount must be greater than 0");
+        }
+
+        if (card.getAvailableCredit().compareTo(amount) < 0) {
+            throw new RuntimeException("Insufficient available credit");
+        }
+
+        card.setAvailableCredit(card.getAvailableCredit().subtract(amount));
+        card.setOutstandingAmount(card.getOutstandingAmount().add(amount));
+
+        return creditCardRepository.save(card);
+    }
+
+    public CreditCard applyPayment(String cardNumber, BigDecimal amount) {
+        CreditCard card = getCardByNumber(cardNumber);
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("Payment amount must be greater than 0");
+        }
+
+        if (card.getOutstandingAmount().compareTo(amount) < 0) {
+            throw new RuntimeException("Payment amount cannot be greater than outstanding amount");
+        }
+
+        card.setOutstandingAmount(card.getOutstandingAmount().subtract(amount));
+        card.setAvailableCredit(card.getAvailableCredit().add(amount));
+
+        return creditCardRepository.save(card);
+    }
 }
