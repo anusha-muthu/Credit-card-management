@@ -1,5 +1,5 @@
 package com.creditcard.service;
-
+import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -7,17 +7,21 @@ import org.springframework.stereotype.Service;
 
 import com.creditcard.entity.CreditCard;
 import com.creditcard.repository.CreditCardRepository;
-
+import java.math.BigDecimal;
 @Service
 public class CreditCardService {
 
     private final CreditCardRepository creditCardRepository;
+    private final RestTemplate restTemplate;
 
-    public CreditCardService(CreditCardRepository creditCardRepository) {
+    public CreditCardService(CreditCardRepository creditCardRepository, RestTemplate restTemplate) {
         this.creditCardRepository = creditCardRepository;
+        this.restTemplate = restTemplate;
     }
 
     public CreditCard addCard(CreditCard creditCard) {
+//        validateCustomerExists(creditCard.getCustomerId());
+
         if (creditCardRepository.existsById(creditCard.getCardNumber())) {
             throw new RuntimeException("Card already exists with number: " + creditCard.getCardNumber());
         }
@@ -36,9 +40,17 @@ public class CreditCardService {
 
         return creditCardRepository.save(creditCard);
     }
-
     public List<CreditCard> getAllCards() {
         return creditCardRepository.findAll();
+    }
+    public BigDecimal getAvailableCredit(String cardNumber) {
+        CreditCard card = getCardByNumber(cardNumber);
+        return card.getAvailableCredit();
+    }
+
+    public BigDecimal getOutstandingAmount(String cardNumber) {
+        CreditCard card = getCardByNumber(cardNumber);
+        return card.getOutstandingAmount();
     }
 
     public CreditCard getCardByNumber(String cardNumber) {
@@ -79,5 +91,12 @@ public class CreditCardService {
         CreditCard card = getCardByNumber(cardNumber);
         card.setCardStatus("ACTIVE");
         return creditCardRepository.save(card);
+    }
+    private void validateCustomerExists(Long customerId) {
+        try {
+            restTemplate.getForObject("http://localhost:8081/api/customers/" + customerId, Object.class);
+        } catch (Exception ex) {
+            throw new RuntimeException("Customer does not exist with id: " + customerId);
+        }
     }
 }

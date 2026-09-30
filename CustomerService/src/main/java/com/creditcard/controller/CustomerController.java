@@ -1,5 +1,5 @@
 package com.creditcard.controller;
-
+import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@Valid @RequestBody Customer customer) {
         Customer savedCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
@@ -46,6 +46,7 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     public ResponseEntity<Customer> updateCustomer(
+    		@Valid 
             @PathVariable Long customerId,
             @RequestBody Customer customer) {
 

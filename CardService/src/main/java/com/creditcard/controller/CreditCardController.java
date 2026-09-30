@@ -1,5 +1,6 @@
 package com.creditcard.controller;
-
+import java.math.BigDecimal;
+import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class CreditCardController {
     }
 
     @PostMapping
-    public ResponseEntity<CreditCard> addCard(@RequestBody CreditCard creditCard) {
+    public ResponseEntity<CreditCard> addCard(@Valid @RequestBody CreditCard creditCard) {
         CreditCard savedCard = creditCardService.addCard(creditCard);
         return new ResponseEntity<>(savedCard, HttpStatus.CREATED);
     }
@@ -55,18 +56,27 @@ public class CreditCardController {
     }
 
     @DeleteMapping("/{cardNumber}")
-    public ResponseEntity<String> deleteCard(@PathVariable String cardNumber) {
+    public ResponseEntity<String> deleteCard(@Valid @PathVariable String cardNumber) {
         creditCardService.deleteCard(cardNumber);
         return ResponseEntity.ok("Card deleted successfully");
     }
 
     @PutMapping("/{cardNumber}/block")
-    public ResponseEntity<CreditCard> blockCard(@PathVariable String cardNumber) {
+    public ResponseEntity<CreditCard> blockCard(@Valid @PathVariable String cardNumber) {
         return ResponseEntity.ok(creditCardService.blockCard(cardNumber));
     }
 
     @PutMapping("/{cardNumber}/unblock")
-    public ResponseEntity<CreditCard> unblockCard(@PathVariable String cardNumber) {
+    public ResponseEntity<CreditCard> unblockCard(@Valid @PathVariable String cardNumber) {
         return ResponseEntity.ok(creditCardService.unblockCard(cardNumber));
+    }
+    @GetMapping("/{cardNumber}/available-credit")
+    public ResponseEntity<BigDecimal> getAvailableCredit(@PathVariable String cardNumber) {
+        return ResponseEntity.ok(creditCardService.getAvailableCredit(cardNumber));
+    }
+
+    @GetMapping("/{cardNumber}/outstanding")
+    public ResponseEntity<BigDecimal> getOutstandingAmount(@PathVariable String cardNumber) {
+        return ResponseEntity.ok(creditCardService.getOutstandingAmount(cardNumber));
     }
 }
