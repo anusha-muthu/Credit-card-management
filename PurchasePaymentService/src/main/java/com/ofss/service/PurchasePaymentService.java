@@ -54,11 +54,14 @@ public class PurchasePaymentService {
                 return "Purchase failed: Card is not active";
             }
             // 4. Find merchant
-            MerchantResponse merchant = merchantClient.getMerchant(request.getMerchantId());
-            if (merchant == null) {
-                createFailedPurchaseTransaction(request,"FAILED");
-                return "Purchase failed: Merchant not found";
-            }
+//            MerchantResponse merchant = merchantClient.getMerchant(String.valueOf(request.getMerchantId()));
+//            if (merchant == null) {
+//                createFailedPurchaseTransaction(request,"FAILED");
+//                return "Purchase failed: Merchant not found";
+//            }
+            
+            MerchantResponse merchant = new MerchantResponse();
+            
             // 5. Get available credit
             BigDecimal availableCredit =card.getAvailableCredit();
             if (availableCredit == null) {
@@ -110,7 +113,7 @@ public class PurchasePaymentService {
 
         try {
             // 2. Find card
-            CardResponse card =creditCardClient.getCard(request.getCardNumber());
+            CardResponse card =creditCardClient.getCard(String.valueOf(request.getCardNumber()));
 
             if (card == null) {
                 createFailedPaymentTransaction(request);
@@ -148,14 +151,11 @@ public class PurchasePaymentService {
             // 8. Calculate new available credit
             BigDecimal newAvailableCredit = availableCredit.add(request.getPaymentAmount());
             // 9. Update outstanding
-            creditCardClient.updateOutstanding(
-                    request.getCardNumber(), newOutstanding);
+            creditCardClient.updateOutstanding(String.valueOf(request.getCardNumber()), newOutstanding);
             // 10. Update available credit
-            creditCardClient.updateAvailableCredit(
-                    request.getCardNumber(),newAvailableCredit);
+            creditCardClient.updateAvailableCredit(String.valueOf(request.getCardNumber()),newAvailableCredit);
             // 11. Create successful transaction
-            transactionClient.createTransaction(
-                    request.getCardNumber(),
+            transactionClient.createTransaction(String.valueOf(request.getCardNumber()),
                     null, request.getPaymentAmount(),
                     "PAYMENT","SUCCESS");
             return "Payment successful";
@@ -183,7 +183,7 @@ public class PurchasePaymentService {
     private void createFailedPaymentTransaction(PaymentRequest request) {
 
         try {
-        	transactionClient.createTransaction(request.getCardNumber(),
+        	transactionClient.createTransaction(String.valueOf(request.getCardNumber()),
                     null, request.getPaymentAmount(),
                     "PAYMENT","FAILED");
 
